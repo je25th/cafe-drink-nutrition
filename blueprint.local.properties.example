@@ -1,0 +1,2 @@
+# Personal values for this project. Copy to blueprint.local.properties and fill in.
+# Refer to them elsewhere as ${KEY}.
