@@ -27,7 +27,9 @@
 - `Drink` is a dataclass with the fields from the project plan. Type hints on
   public functions.
 - Unknown values are `None` (`null` in JSON), never `0`.
-- ids are `<brand>-<brand product code>`, never the drink name.
+- ids come only from `drink_id()`: brand + name with all whitespace removed +
+  temp. The brand's product code is stored as `code`, never used as the id.
+  Code treats ids as opaque keys and never parses them.
 - Store only names and numbers. No descriptions or photos.
 
 ## TypeScript
@@ -63,11 +65,13 @@
 
 ## Data and Validation
 
-- `drinks.json` has a `version` (build date, `YYYY-MM-DD`) and a list of drinks.
+- `drinks.json` has a `version` (build date, `YYYY-MM-DD`), a `fetched` date per
+  brand, and a list of drinks. It accumulates: the build merges into the last
+  file and never drops a drink that left the brand's site.
 - The scraper build validates before writing: kcal > 0, sugar <= carbs + 1g, no
-  duplicate ids. It stops and shows the diff if more than 10% of drinks disappear
-  or a value changes by more than 50%.
-- Manual fixes go in `overrides.json`, applied by id.
+  duplicate ids. It stops and shows the diff if more than 10% of a brand's
+  on-sale drinks leave the site in one run or a value changes by more than 50%.
+- Manual fixes go in `overrides.json`, applied by brand + product code.
 - The web app shows `-` for unknown (`null`) values and treats them as last when
   sorting.
 
