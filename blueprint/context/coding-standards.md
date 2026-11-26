@@ -171,6 +171,11 @@ Over-commenting is a common AI tell, so resist it.
 - Keep doc comments minimal: a one-line purpose on an exported type or function is
   plenty; don't write JSDoc that just repeats the signature.
 - When in doubt, leave the comment out.
+- Language: ordinary comments and docstrings are in English. Important warnings
+  are in Korean, so the owner reads them at a glance: high-risk or fragile code
+  (for example scraping that breaks when a brand site changes), what breaks and
+  why, and what to do by hand when it does. Start the risk line with `[위험 높음]`
+  or `[주의]`.
 
 ## Writing
 
